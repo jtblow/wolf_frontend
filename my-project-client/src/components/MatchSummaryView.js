@@ -9,8 +9,6 @@ class MatchSummaryView extends Component {
     };
   }
 
-  getHoleInfo = () => {};
-
   showCard = holes => {
     this.setState({
       matchSummaryCards: this.props.players.map(player =>

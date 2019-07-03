@@ -8,6 +8,7 @@ import EnterScoreForm from "./EnterScoreForm";
 import MatchSummaryView from "./MatchSummaryView";
 import MatchSummaryButton from "./MatchSummaryButton";
 import BackButton from "./BackButton";
+import GeneratingOrder from "./GeneratingOrder";
 
 class GameView extends Component {
   constructor() {
@@ -62,11 +63,18 @@ class GameView extends Component {
   //   });
   // };
 
-  handleBeginRoundClick = () => {
+  moveToFirstWolf = () => {
     this.setState({
       holeNum: 1,
       gameProgress: "FirstWolfSelection"
     });
+  };
+
+  handleBeginRoundClick = () => {
+    this.setState({
+      gameProgress: "OrderGenerator"
+    });
+    setTimeout(() => this.moveToFirstWolf(), 3000);
   };
 
   onScoreSubmit = sortedScores => {
@@ -210,9 +218,19 @@ class GameView extends Component {
           </div>
         );
         break;
+      case "OrderGenerator":
+        return (
+          <div>
+            <h4>Generating Random Wolf Order...</h4>
+            <GeneratingOrder />;
+          </div>
+        );
+        break;
       case "FirstWolfSelection":
         return (
           <div>
+            <h3>Hole: {this.state.holeNum}</h3>
+            <h4>Wager: ${this.state.tallyWager}</h4>
             <h3>Wolf Selection</h3>
             <PlayerCardContainer
               players={this.state.players}
@@ -226,9 +244,8 @@ class GameView extends Component {
       case "WolfSelection":
         return (
           <div>
-            <h2>{`Hole: ${this.state.holeNum}  Wager: $${
-              this.state.tallyWager
-            }`}</h2>
+            <h3>Hole: {this.state.holeNum}</h3>
+            <h4>Wager: ${this.state.tallyWager}</h4>
             <h3>Wolf Selection</h3>
             <PlayerCardContainer
               players={this.state.players}
@@ -266,12 +283,10 @@ class GameView extends Component {
           <div>
             <h3>Hole: {this.state.holeNum}</h3>
             <h4>
-              {team1Display} vs {team2Display}
+              {team1Display} <br /> vs <br /> {team2Display}
             </h4>
-            <PlayerCardContainer
-              players={this.state.players}
-              gameProgress={this.state.gameProgress}
-            />
+            <h5>Wager: ${this.state.tallyWager}</h5>
+
             <EnterScoreButton handleESClick={this.handleESClick} />
           </div>
         );

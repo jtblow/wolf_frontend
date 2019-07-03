@@ -107,7 +107,7 @@ class EnterScoreForm extends Component {
       ) {
         let winningTeam = sortedScores[0].team;
         sortedScores[i].team == winningTeam
-          ? (sortedScores[i].outcome = this.props.tallyWager)
+          ? (sortedScores[i].outcome = this.props.tallyWager * 3)
           : (sortedScores[i].outcome = this.props.tallyWager * -1);
         // first and second player are on same team2
       } else if (

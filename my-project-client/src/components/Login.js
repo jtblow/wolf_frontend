@@ -63,13 +63,14 @@ class Login extends Component {
           placeholder="Username"
           name="username"
         />
+        <br />
         <input
           onChange={this.handleChange}
           placeholder="Email"
           name="email"
           type="text"
         />
-
+        <br />
         <button onClick={event => this.handleCreateAccount(event)}>
           Login
         </button>

@@ -6,8 +6,8 @@ function App() {
     <div className="App">
       <header className="App-header">
         <img
-          src="https://i.ibb.co/84zjVv5/Screen-Shot-2019-06-24-at-4-16-24-PM.png"
-          alt="Screen-Shot-2019-06-24-at-4-16-24-PM"
+          src="https://i.ibb.co/SvwdGLJ/WolfLogo.png"
+          alt="WolfLogo"
           border="0"
         />
       </header>

@@ -36,7 +36,7 @@ class PlayerCardContainer extends Component {
   render() {
     return (
       <div>
-        {this.props.gameProgress === "Beginning"
+        {this.props.gameProgress === "FirstWolfSelection"
           ? this.renderRandomOrder()
           : this.renderNormalOrder()}
       </div>

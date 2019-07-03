@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import GameView from "./GameView";
 import Login from "./Login";
+import UserMatchList from "./UserMatchList";
 
 class Home extends Component {
   constructor() {
@@ -18,15 +19,40 @@ class Home extends Component {
         username: response.username,
         email: response.email
       },
-      loginSuccessful: true
+      currentView: "HomeView"
     });
-    localStorage.setItem(user, response.id);
   };
-  homeRenderController = () => {
-    if (this.state.loginSuccessful === true) {
-      return <GameView signedInUser={this.state.signedInUser} />;
+
+  handleClick = event => {
+    if (event.target.innerText === "View Your Wolf Matches") {
+      this.setState({ currentView: "UserMatchList" });
     } else {
-      return <Login getLoginData={this.getLoginData} />;
+      this.setState({ currentView: "GameView" });
+    }
+  };
+
+  homeRenderController = () => {
+    switch (this.state.currentView) {
+      case "login":
+        return <Login getLoginData={this.getLoginData} />;
+        break;
+      case "HomeView":
+        return (
+          <div>
+            <div onClick={event => this.handleClick(event)}>
+              View Your Wolf Matches
+            </div>
+            <div onClick={event => this.handleClick(event)}>
+              Start a New Match
+            </div>
+          </div>
+        );
+        break;
+      case "UserMatchList":
+        return <UserMatchList signedInUser={this.state.signedInUser} />;
+        break;
+      case "GameView":
+        return <GameView signedInUser={this.state.signedInUser} />;
     }
   };
 
