@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import MatchSummaryCard from "./MatchSummaryCard";
+import "../App.css";
 
 class MatchSummaryView extends Component {
   constructor() {

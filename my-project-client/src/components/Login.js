@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../App.css";
 class Login extends Component {
   state = {
     username: "",
@@ -57,14 +58,16 @@ class Login extends Component {
 
   render() {
     return (
-      <form>
+      <form className="Login">
         <input
+          className="FormInput"
           onChange={this.handleChange}
           placeholder="Username"
           name="username"
         />
         <br />
         <input
+          className="FormInput"
           onChange={this.handleChange}
           placeholder="Email"
           name="email"

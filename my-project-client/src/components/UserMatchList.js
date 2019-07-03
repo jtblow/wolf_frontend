@@ -18,7 +18,14 @@ class UserMatchList extends Component {
 
   renderListings = matches => {
     let userMatches = matches.map(match => {
-      return <UserMatchListing matchListing={match} />;
+      return (
+        <UserMatchListing
+          matchListing={match}
+          key={match.id}
+          value={match.id}
+          handleMatchClick={this.handleMatchClick}
+        />
+      );
     });
     this.setState({ userMatches: userMatches });
   };

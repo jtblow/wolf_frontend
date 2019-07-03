@@ -5,11 +5,14 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img
-          src="https://i.ibb.co/SvwdGLJ/WolfLogo.png"
-          alt="WolfLogo"
-          border="0"
-        />
+        <div className="imgcontainer">
+          <img
+            src="https://i.ibb.co/SvwdGLJ/WolfLogo.png"
+            alt="WolfLogo"
+            border="0"
+            className="WolfLogo"
+          />
+        </div>
       </header>
 
       <Home />

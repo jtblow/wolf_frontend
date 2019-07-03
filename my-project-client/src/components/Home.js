@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GameView from "./GameView";
 import Login from "./Login";
 import UserMatchList from "./UserMatchList";
+import "../App.css";
 
 class Home extends Component {
   constructor() {
@@ -12,6 +13,39 @@ class Home extends Component {
       signedInUser: ""
     };
   }
+  componentDidMount() {
+    if (localStorage.getItem("user")) {
+      const url = "http://localhost:3000/api/v1/users/login";
+      const data = {
+        user: {
+          username: localStorage.getItem("user"),
+          email: localStorage.getItem("mail")
+        }
+      };
+      const fetchHeaders = {
+        "Content-Type": "application/json"
+      };
+
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(data),
+        headers: fetchHeaders
+      })
+        .then(resp => resp.json())
+        .then(response => this.stayLoggedIn(response));
+    }
+  }
+  stayLoggedIn = response => {
+    this.setState({
+      signedInUser: {
+        userID: response.id,
+        username: response.username,
+        email: response.email
+      },
+      currentView: "HomeView"
+    });
+  };
+
   getLoginData = response => {
     this.setState({
       signedInUser: {
@@ -21,6 +55,8 @@ class Home extends Component {
       },
       currentView: "HomeView"
     });
+    localStorage.setItem("user", this.state.signedInUser.username);
+    localStorage.setItem("mail", this.state.signedInUser.email);
   };
 
   handleClick = event => {
@@ -34,15 +70,22 @@ class Home extends Component {
   homeRenderController = () => {
     switch (this.state.currentView) {
       case "login":
-        return <Login getLoginData={this.getLoginData} />;
+        return <Login className="Login" getLoginData={this.getLoginData} />;
         break;
       case "HomeView":
         return (
-          <div>
-            <div onClick={event => this.handleClick(event)}>
+          <div className="HomeView">
+            <div
+              className="HomeButtons"
+              onClick={event => this.handleClick(event)}
+            >
               View Your Wolf Matches
             </div>
-            <div onClick={event => this.handleClick(event)}>
+            <br />
+            <div
+              className="HomeButtons"
+              onClick={event => this.handleClick(event)}
+            >
               Start a New Match
             </div>
           </div>

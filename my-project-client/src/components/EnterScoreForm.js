@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import "../App.css";
 const holesURL = "http://localhost:3000/api/v1/holes";
 
 class EnterScoreForm extends Component {
@@ -111,7 +112,7 @@ class EnterScoreForm extends Component {
           : (sortedScores[i].outcome = this.props.tallyWager * -1);
         // first and second player are on same team2
       } else if (
-        sortedScores[0].score == sortedScores[1].score &&
+        sortedScores[0].score <= sortedScores[1].score &&
         sortedScores[0].team == sortedScores[1].team
       ) {
         let winningTeam = sortedScores[0].team;
@@ -150,52 +151,59 @@ class EnterScoreForm extends Component {
 
   render() {
     return (
-      <form className="score-form" onSubmit={this.handleSubmit}>
-        <label>Par</label>
-        <input
-          type="text"
-          placeholder="Enter the Par from Scorecard..."
-          value={this.state.par}
-          onChange={this.handleParTextChange}
-        />
-        <br />
+      <div className="score-form">
+        <form onSubmit={this.handleSubmit}>
+          <label className="label">Par</label>
+          <input
+            type="text"
+            placeholder="Enter the Par from Scorecard..."
+            value={this.state.par}
+            className="ScoreFormInput"
+            onChange={this.handleParTextChange}
+          />
+          <br />
 
-        <label>{this.props.players[0].username}</label>
-        <input
-          type="text"
-          placeholder={`${this.props.players[0].username}'s score...'`}
-          value={this.state.player1}
-          onChange={this.handleP1TextChange}
-        />
-        <br />
-        <label>{this.props.players[1].username}</label>
-        <input
-          type="text"
-          placeholder={`${this.props.players[1].username}'s score...'`}
-          value={this.state.player2}
-          onChange={this.handleP2TextChange}
-        />
-        <br />
-        <label>{this.props.players[2].username}</label>
-        <input
-          type="text"
-          placeholder={`${this.props.players[2].username}'s score...'`}
-          value={this.state.player3}
-          onChange={this.handleP3TextChange}
-        />
-        <br />
-        <label>{this.props.players[3].username}</label>
-        <input
-          label={this.props.players[3].username}
-          type="text"
-          placeholder={`${this.props.players[3].username}'s score...'`}
-          value={this.state.player4}
-          onChange={this.handleP4TextChange}
-        />
+          <label className="label">{this.props.players[0].username}</label>
+          <input
+            type="text"
+            placeholder={`${this.props.players[0].username}'s score...'`}
+            value={this.state.player1}
+            onChange={this.handleP1TextChange}
+            className="ScoreFormInput"
+          />
+          <br />
+          <label className="label">{this.props.players[1].username}</label>
+          <input
+            type="text"
+            placeholder={`${this.props.players[1].username}'s score...'`}
+            value={this.state.player2}
+            onChange={this.handleP2TextChange}
+            className="ScoreFormInput"
+          />
+          <br />
+          <label className="label">{this.props.players[2].username}</label>
+          <input
+            type="text"
+            placeholder={`${this.props.players[2].username}'s score...'`}
+            value={this.state.player3}
+            onChange={this.handleP3TextChange}
+            className="ScoreFormInput"
+          />
+          <br />
+          <label className="label">{this.props.players[3].username}</label>
+          <input
+            label={this.props.players[3].username}
+            type="text"
+            placeholder={`${this.props.players[3].username}'s score...'`}
+            value={this.state.player4}
+            onChange={this.handleP4TextChange}
+            className="ScoreFormInput"
+          />
 
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 }

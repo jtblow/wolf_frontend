@@ -1,11 +1,12 @@
 import React from "react";
+import MatchSummaryView from "./MatchSummaryView";
 
 const UserMatchListing = props => {
   return (
-    <li>
+    <div>
       {props.matchListing.course_name}:{" "}
       {props.matchListing.created_at.slice(0, 10)}
-    </li>
+    </div>
   );
 };
 export default UserMatchListing;

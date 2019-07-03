@@ -71,50 +71,60 @@ class MatchForm extends Component {
 
   render() {
     return (
-      <form className="match-form" onSubmit={this.handleSubmit}>
-        <input
-          type="text"
-          placeholder="Course Name..."
-          value={this.state.course_name}
-          onChange={this.handleCourseTextChange}
-        />
+      <div className="match-form">
+        <h3>Enter Your Players and Set Wager For Match</h3>
         <br />
-        <input
-          type="text"
-          value={this.props.signedInUser.username}
-          onChange={this.handleP1TextChange}
-        />
-        <br />
-        <input
-          type="text"
-          placeholder="Player 2..."
-          value={this.state.player2}
-          onChange={this.handleP2TextChange}
-        />
-        <br />
-        <input
-          type="text"
-          placeholder="Player 3..."
-          value={this.state.player3}
-          onChange={this.handleP3TextChange}
-        />
-        <br />
-        <input
-          type="text"
-          placeholder="Player 4..."
-          value={this.state.player4}
-          onChange={this.handleP4TextChange}
-        />
-        <br />
-        <input
-          type="text"
-          placeholder="Wager (per player, per hole)..."
-          value={this.state.wager}
-          onChange={this.handleWagerTextChange}
-        />
-        <br />
-        <input type="submit" value="Submit" />
-      </form>
+        <form onSubmit={this.handleSubmit}>
+          <input
+            className="FormInput"
+            type="text"
+            placeholder="Course Name..."
+            value={this.state.course_name}
+            onChange={this.handleCourseTextChange}
+          />
+          <br />
+          <input
+            className="FormInput"
+            type="text"
+            value={this.props.signedInUser.username}
+            readonly
+          />
+          <br />
+          <input
+            className="FormInput"
+            type="text"
+            placeholder="Player 2..."
+            value={this.state.player2}
+            onChange={this.handleP2TextChange}
+          />
+          <br />
+          <input
+            className="FormInput"
+            type="text"
+            placeholder="Player 3..."
+            value={this.state.player3}
+            onChange={this.handleP3TextChange}
+          />
+          <br />
+          <input
+            className="FormInput"
+            type="text"
+            placeholder="Player 4..."
+            value={this.state.player4}
+            onChange={this.handleP4TextChange}
+          />
+          <br />
+          <input
+            className="FormInput"
+            type="text"
+            placeholder="Wager (per player, per hole)..."
+            value={this.state.wager}
+            onChange={this.handleWagerTextChange}
+          />
+          <br />
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
     );
   }
 }

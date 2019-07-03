@@ -13,10 +13,14 @@ class PlayerCardContainer extends Component {
     let randomOrder = this.props.players.sort((a, b) => 0.5 - Math.random());
     let randomPlayerCards = randomOrder.map(player => {
       return (
-        <PlayerCard
-          player={player}
-          handleWolfChoice={this.props.handleWolfChoice}
-        />
+        <div>
+          <PlayerCard
+            className="PlayerCard"
+            player={player}
+            handleWolfChoice={this.props.handleWolfChoice}
+          />
+          <br />
+        </div>
       );
     });
     return randomPlayerCards;
@@ -25,10 +29,13 @@ class PlayerCardContainer extends Component {
   renderNormalOrder = () => {
     let normalPlayerCards = this.props.players.map(player => {
       return (
-        <PlayerCard
-          player={player}
-          handleWolfChoice={this.props.handleWolfChoice}
-        />
+        <div className="PlayerCardContainer">
+          <PlayerCard
+            player={player}
+            handleWolfChoice={this.props.handleWolfChoice}
+          />
+          <br />
+        </div>
       );
     });
     return normalPlayerCards;

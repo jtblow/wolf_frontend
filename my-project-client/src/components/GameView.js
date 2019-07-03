@@ -196,7 +196,6 @@ class GameView extends Component {
       case "MatchForm":
         return (
           <div>
-            <h3>Enter Your Players and Set Wager For Match</h3>
             <MatchForm
               onMatchSubmit={this.onMatchSubmit}
               signedInUser={this.props.signedInUser}
@@ -206,7 +205,7 @@ class GameView extends Component {
         break;
       case "Beginning":
         return (
-          <div>
+          <div className="Beginning">
             <h3>The Field is Set</h3>
             <PlayerCardContainer
               players={this.state.players}
@@ -220,7 +219,7 @@ class GameView extends Component {
         break;
       case "OrderGenerator":
         return (
-          <div>
+          <div className="OrderGenerator">
             <h4>Generating Random Wolf Order...</h4>
             <GeneratingOrder />;
           </div>
@@ -228,10 +227,11 @@ class GameView extends Component {
         break;
       case "FirstWolfSelection":
         return (
-          <div>
-            <h3>Hole: {this.state.holeNum}</h3>
-            <h4>Wager: ${this.state.tallyWager}</h4>
+          <div className="WolfSelection">
             <h3>Wolf Selection</h3>
+            <h4>Hole: {this.state.holeNum}</h4>
+            <h4>Wager: ${this.state.tallyWager}</h4>
+
             <PlayerCardContainer
               players={this.state.players}
               gameProgress={this.state.gameProgress}
@@ -243,10 +243,10 @@ class GameView extends Component {
         break;
       case "WolfSelection":
         return (
-          <div>
-            <h3>Hole: {this.state.holeNum}</h3>
-            <h4>Wager: ${this.state.tallyWager}</h4>
+          <div className="WolfSelection">
             <h3>Wolf Selection</h3>
+            <h4>Hole: {this.state.holeNum}</h4>
+            <h4>Wager: ${this.state.tallyWager}</h4>
             <PlayerCardContainer
               players={this.state.players}
               gameProgress={this.state.gameProgress}
@@ -280,12 +280,12 @@ class GameView extends Component {
         }
 
         return (
-          <div>
+          <div className="MidRound">
             <h3>Hole: {this.state.holeNum}</h3>
             <h4>
               {team1Display} <br /> vs <br /> {team2Display}
             </h4>
-            <h5>Wager: ${this.state.tallyWager}</h5>
+            <h4>Wager: ${this.state.tallyWager}</h4>
 
             <EnterScoreButton handleESClick={this.handleESClick} />
           </div>
@@ -307,7 +307,7 @@ class GameView extends Component {
         break;
       case "MatchSummary":
         return (
-          <div>
+          <div className="MatchSummary">
             <MatchSummaryView
               players={this.state.players}
               match={this.state.matchID}
