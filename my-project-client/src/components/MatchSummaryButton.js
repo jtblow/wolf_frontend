@@ -2,10 +2,13 @@ import React from "react";
 
 const MatchSummaryButton = props => {
   return (
-    <button onClick={props.handleMatchSummaryButton}>
+    <div
+      className="ViewMatchSummaryButton"
+      onClick={props.handleMatchSummaryButton}
+    >
       {" "}
       View Match Summary{" "}
-    </button>
+    </div>
   );
 };
 export default MatchSummaryButton;

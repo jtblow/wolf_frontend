@@ -4,7 +4,8 @@ const WolfButtons = props => {
   return (
     <div>
       <button className="WolfButtons" onClick={props.handleWolfButton}>
-        Blind Wolf
+        {" "}
+        Blind Wolf{" "}
       </button>
       <button className="WolfButtons" onClick={props.handleWolfButton}>
         {" "}

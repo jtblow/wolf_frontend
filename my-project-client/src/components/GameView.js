@@ -78,27 +78,31 @@ class GameView extends Component {
   };
 
   onScoreSubmit = sortedScores => {
-    let playersArray = this.state.players;
-    let oldWolf = playersArray.shift();
-    playersArray.push(oldWolf);
-
-    this.setState({
-      holeNum: this.state.holeNum + 1,
-      players: playersArray,
-      team1: "",
-      team2: "",
-      gameProgress: "WolfSelection"
-    });
-    if (
-      sortedScores[0].score === sortedScores[1].score &&
-      sortedScores[0].team !== sortedScores[1].team
-    ) {
-      this.setState({
-        tallyWager:
-          parseInt(this.state.tallyWager) + parseInt(this.state.originalWager)
-      });
+    if (this.state.holeNum === 18) {
+      this.setState({ gameProgress: "MatchOver" });
     } else {
-      this.setState({ tallyWager: this.state.originalWager });
+      let playersArray = this.state.players;
+      let oldWolf = playersArray.shift();
+      playersArray.push(oldWolf);
+
+      this.setState({
+        holeNum: this.state.holeNum + 1,
+        players: playersArray,
+        team1: "",
+        team2: "",
+        gameProgress: "WolfSelection"
+      });
+      if (
+        sortedScores[0].score === sortedScores[1].score &&
+        sortedScores[0].team !== sortedScores[1].team
+      ) {
+        this.setState({
+          tallyWager:
+            parseInt(this.state.tallyWager) + parseInt(this.state.originalWager)
+        });
+      } else {
+        this.setState({ tallyWager: this.state.originalWager });
+      }
     }
   };
 
@@ -210,6 +214,7 @@ class GameView extends Component {
             <PlayerCardContainer
               players={this.state.players}
               gameProgress={this.state.gameProgress}
+              handleWolfChoice={this.handleWolfChoice}
             />
             <BeginRoundButton
               handleBeginRoundClick={this.handleBeginRoundClick}
@@ -245,8 +250,10 @@ class GameView extends Component {
         return (
           <div className="WolfSelection">
             <h3>Wolf Selection</h3>
-            <h4>Hole: {this.state.holeNum}</h4>
-            <h4>Wager: ${this.state.tallyWager}</h4>
+            <h4>
+              Hole: {this.state.holeNum} Wager: ${this.state.tallyWager}
+            </h4>
+
             <PlayerCardContainer
               players={this.state.players}
               gameProgress={this.state.gameProgress}
@@ -308,6 +315,18 @@ class GameView extends Component {
       case "MatchSummary":
         return (
           <div className="MatchSummary">
+            <MatchSummaryView
+              players={this.state.players}
+              match={this.state.matchID}
+            />
+            <BackButton handleBack={this.handleBack} />
+          </div>
+        );
+        break;
+      case "MatchOver":
+        return (
+          <div className="MatchSummary">
+            <h3>Final Scores</h3>
             <MatchSummaryView
               players={this.state.players}
               match={this.state.matchID}

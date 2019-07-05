@@ -5,13 +5,13 @@ class MatchDetailsContainer extends Component {
   constructor() {
     super();
     this.state = {
-      matchSummaryCards: ""
+      matchDetailsCards: ""
     };
   }
 
   showCard = holes => {
     this.setState({
-      matchSummaryCards: this.props.players.map(player =>
+      matchDetailsCards: this.props.players.map(player =>
         this.getSummaryCard(player, holes)
       )
     });
@@ -23,19 +23,14 @@ class MatchDetailsContainer extends Component {
       .then(holes => this.showCard(holes));
   }
 
-  getSummaryCard = (player, holes) => {
+  getDetailsCard = (player, holes) => {
     let filteredHoles = holes.filter(hole => hole.user_id === player.id);
-    let holeVal = filteredHoles.reduce(function(previousValue, currentValue) {
-      return {
-        score: previousValue.score + currentValue.score,
-        outcome: previousValue.outcome + currentValue.outcome
-      };
-    });
+
     return (
       <MatchSummaryCard
         player={player}
-        score={holeVal.score}
-        outcome={holeVal.outcome}
+        score={filteredHoles.score}
+        outcome={filteredHoles.outcome}
       />
     );
   };
@@ -43,7 +38,7 @@ class MatchDetailsContainer extends Component {
   render() {
     return (
       <div>
-        <h2>Match Summary</h2>
+        <h2>Match Details</h2>
 
         <table>
           <tbody>
@@ -52,7 +47,7 @@ class MatchDetailsContainer extends Component {
               <th>Score</th>
               <th>Bank</th>
             </tr>
-            {this.state.matchSummaryCards}
+            {this.state.matchDetailsCards}
           </tbody>
         </table>
       </div>

@@ -32,6 +32,7 @@ class MatchSummaryView extends Component {
         outcome: previousValue.outcome + currentValue.outcome
       };
     });
+
     return (
       <MatchSummaryCard
         player={player}

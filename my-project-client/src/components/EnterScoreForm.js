@@ -102,6 +102,7 @@ class EnterScoreForm extends Component {
 
     for (let i = 0; i < sortedScores.length; i++) {
       // no tie, regular scenario, one player has lowest score
+
       if (
         sortedScores[0].score !== sortedScores[1].score &&
         sortedScores[0].team !== sortedScores[1].team
@@ -115,8 +116,9 @@ class EnterScoreForm extends Component {
         sortedScores[0].score <= sortedScores[1].score &&
         sortedScores[0].team == sortedScores[1].team
       ) {
+        debugger;
         let winningTeam = sortedScores[0].team;
-        sortedScores[i].team = winningTeam
+        sortedScores[i].team == winningTeam
           ? (sortedScores[i].outcome = this.props.tallyWager)
           : (sortedScores[i].outcome = this.props.tallyWager * -1);
       } else {
@@ -161,6 +163,7 @@ class EnterScoreForm extends Component {
             className="ScoreFormInput"
             onChange={this.handleParTextChange}
           />
+
           <br />
 
           <label className="label">{this.props.players[0].username}</label>
