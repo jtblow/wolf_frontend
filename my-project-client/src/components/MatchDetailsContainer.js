@@ -28,12 +28,10 @@ class MatchDetailsContainer extends Component {
 
     let filteredHoleCards = filteredHoles.map(hole => {
       return (
-        <MatchDetailsCard
-          player={player}
-          score={hole.score}
-          outcome={hole.outcome}
-          holeNum={hole.hole_number}
-        />
+        <React.Fragment>
+          <td>{hole.score}</td>
+          <td>{hole.outcome}</td>
+        </React.Fragment>
       );
     });
 
@@ -46,25 +44,86 @@ class MatchDetailsContainer extends Component {
         <h2>Match Details</h2>
 
         <table>
-          <tbody>
+          <thead>
             <tr>
               <th />
-              <th scope="col">header1</th>
-              <th scope="col">header2</th>
-              <th scope="col">header3</th>
+
+              <th colSpan="2">1</th>
+
+              <th colSpan="2">2</th>
+              <th colSpan="2">3</th>
+              <th colSpan="2">4</th>
+              <th colSpan="2">5</th>
+              <th colSpan="2">6</th>
+              <th colSpan="2">7</th>
+              <th colSpan="2">8</th>
+              <th colSpan="2">9</th>
+              <th colSpan="2">10</th>
+              <th colSpan="2">11</th>
+              <th colSpan="2">12</th>
+              <th colSpan="2">13</th>
+              <th colSpan="2">14</th>
+              <th colSpan="2">15</th>
+              <th colSpan="2">16</th>
+              <th colSpan="2">17</th>
+              <th colSpan="2">18</th>
             </tr>
-            {this.state.matchDetailsCards.slice(0, 4)}
             <tr>
-              <th scope="row">header 2</th>
-              {this.state.matchDetailsCards.slice(4, 8)}
+              <th />
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
+              <th>Score</th>
+              <th>$</th>
             </tr>
-            <tr>
-              <th scope="row">header 3</th>
-              <td>3</td>
-              <td>3</td>
-              <td>3</td>
-            </tr>
-          </tbody>
+          </thead>
+          <tr>
+            <th scope="row">{this.props.players[0].username}</th>
+            {this.state.matchDetailsCards[0]}
+          </tr>
+          <tr>
+            <th scope="row">{this.props.players[1].username}</th>
+            {this.state.matchDetailsCards[1]}
+          </tr>
+          <tr>
+            <th scope="row">{this.props.players[2].username}</th>
+            {this.state.matchDetailsCards[2]}
+          </tr>
+          <tr>
+            <th scope="row">{this.props.players[3].username}</th>
+            {this.state.matchDetailsCards[3]}
+          </tr>
         </table>
       </div>
     );

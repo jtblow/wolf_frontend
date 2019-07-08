@@ -45,16 +45,17 @@
   font-size: calc(20px + 5vmin);
   margin-top: 20px;
   margin-bottom: 10px;
-  background-color: white;
+  background-color: #eeebe7;
 }
 
 .wolfCard {
   box-sizing: border-box;
   border-radius: 25px;
   width: 100%;
-  border: solid black 1px;
+  border: solid red 2px;
   padding: 10px;
   font-size: calc(30px + 5vmin);
+
   position: relative;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -101,16 +102,27 @@
 }
 table {
   width: 100%;
+  border: solid black 1px;
+}
+tr {
+  border-bottom: 1px solid grey;
+  border-right: 1px solid grey;
 }
 
-th,
+th {
+  background-color: #dad7d2;
+  border-bottom: 1px solid grey;
+  border-right: 1px solid grey;
+}
+
 td {
   padding: 15px;
   text-align: center;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid grey;
+  border-right: 1px solid grey;
 }
 tr:nth-child(even) {
-  background-color: #f2f2f2;
+  background-color: #d2e0c7;
 }
 .MidRound {
   text-align: center;
@@ -145,7 +157,7 @@ tr:nth-child(even) {
     url("https://i.ibb.co/rtwCDxf/edited-Golf-Ball.png");
 
   background-size: cover;
-  box-shadow: 0 0 3px gray;
+  /* box-shadow: 0 0 3px gray; */
   font-size: 20px;
   font-family: "Barlow Condensed", sans-serif;
   position: relative;
@@ -240,7 +252,7 @@ tr:nth-child(even) {
 .imgcontainer {
   text-align: center;
   margin: 24px 0 12px 0;
-  background-color: #cad1c8;
+  background-color: #eeebe7;
 }
 .WolfLogo {
   width: 30%;

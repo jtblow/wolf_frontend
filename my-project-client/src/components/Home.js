@@ -68,6 +68,9 @@ class Home extends Component {
   handleClick = event => {
     if (event.target.innerText === "View Your Wolf Matches") {
       this.setState({ currentView: "UserMatchList" });
+    } else if (event.target.innerText === "Start a New Match") {
+      localStorage.removeItem("matchID");
+      this.setState({ currentView: "GameView" });
     } else {
       this.setState({ currentView: "GameView" });
     }
@@ -94,23 +97,50 @@ class Home extends Component {
         break;
 
       case "HomeView":
-        return (
-          <div className="HomeView">
-            <div
-              className="HomeButtons"
-              onClick={event => this.handleClick(event)}
-            >
-              View Your Wolf Matches
+        if (localStorage.getItem("matchID")) {
+          return (
+            <div className="HomeView">
+              <div
+                className="HomeButtons"
+                onClick={event => this.handleClick(event)}
+              >
+                View Your Wolf Matches
+              </div>
+              <br />
+              <div
+                className="HomeButtons"
+                onClick={event => this.handleClick(event)}
+              >
+                Continue Current Match
+              </div>
+              <br />
+              <div
+                className="HomeButtons"
+                onClick={event => this.handleClick(event)}
+              >
+                Start a New Match
+              </div>
             </div>
-            <br />
-            <div
-              className="HomeButtons"
-              onClick={event => this.handleClick(event)}
-            >
-              Start a New Match
+          );
+        } else {
+          return (
+            <div className="HomeView">
+              <div
+                className="HomeButtons"
+                onClick={event => this.handleClick(event)}
+              >
+                View Your Wolf Matches
+              </div>
+              <br />
+              <div
+                className="HomeButtons"
+                onClick={event => this.handleClick(event)}
+              >
+                Start a New Match
+              </div>
             </div>
-          </div>
-        );
+          );
+        }
         break;
       case "UserMatchList":
         return <UserMatchList signedInUser={this.state.signedInUser} />;

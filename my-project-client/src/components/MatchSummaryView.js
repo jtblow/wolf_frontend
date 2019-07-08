@@ -9,17 +9,29 @@ class MatchSummaryView extends Component {
     super();
     this.state = {
       matchSummaryCards: "",
-      detailsView: false
+      detailsView: false,
+      players: ""
     };
   }
 
   showCard = holes => {
-    this.setState({
-      matchSummaryCards: this.props.players.map(player =>
-        this.getSummaryCard(player, holes)
-      )
-    });
+    let matchPlayers = [...new Set(holes.map(hole => hole.user_id))];
+    let matchPlayersIDs = matchPlayers.join(",");
+    fetch(
+      "http://localhost:3000/api/v1/users/find_multiple_users_by_id/" +
+        matchPlayersIDs
+    )
+      .then(resp => resp.json())
+      .then(players => {
+        this.setState({
+          players: players,
+          matchSummaryCards: players.map(player =>
+            this.getSummaryCard(player, holes)
+          )
+        });
+      });
   };
+
   handleMatchDetailsButton = event => {
     event.preventDefault();
     this.setState({
@@ -75,7 +87,7 @@ class MatchSummaryView extends Component {
     return this.state.detailsView ? (
       <div>
         <MatchDetailsContainer
-          players={this.props.players}
+          players={this.state.players}
           match={this.props.match}
           holeNum={this.props.holeNum}
         />

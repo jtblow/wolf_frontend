@@ -24,6 +24,27 @@ class GameView extends Component {
       gameProgress: "MatchForm"
     };
   }
+
+  componentDidMount() {
+    if (localStorage.getItem("matchID")) {
+      fetch(
+        `http://localhost:3000/api/v1/users/find_multiple_users_by_name/${localStorage.getItem(
+          "players"
+        )}`
+      )
+        .then(resp => resp.json())
+        .then(players =>
+          this.setState({
+            players,
+            originalWager: localStorage.getItem("originalWager"),
+            tallyWager: localStorage.getItem("tallyWager"),
+            matchID: localStorage.getItem("matchID"),
+            holeNum: parseInt(localStorage.getItem("holeNum")),
+            gameProgress: "WolfSelection"
+          })
+        );
+    }
+  }
   onMatchSubmit = matchFormData => {
     let newPlayers = [
       matchFormData.player1,
@@ -92,24 +113,44 @@ class GameView extends Component {
         team2: "",
         gameProgress: "WolfSelection"
       });
+
       if (
-        sortedScores[0].score === sortedScores[1].score &&
-        sortedScores[0].team !== sortedScores[1].team
+        (sortedScores[0].score === sortedScores[1].score &&
+          sortedScores[0].team !== sortedScores[1].team) ||
+        (sortedScores[0].score === sortedScores[2].score &&
+          sortedScores[0].team !== sortedScores[2].team) ||
+        (sortedScores[0].score === sortedScores[3].score &&
+          sortedScores[0].team !== sortedScores[3].team)
       ) {
         this.setState({
           tallyWager:
             parseInt(this.state.tallyWager) + parseInt(this.state.originalWager)
         });
+        localStorage.setItem(
+          "tallyWager",
+          parseInt(this.state.tallyWager) + parseInt(this.state.originalWager)
+        );
       } else {
         this.setState({ tallyWager: this.state.originalWager });
+        localStorage.setItem("tallyWager", this.state.originalWager);
       }
+
+      setTimeout(this.setStorage(), 1000);
     }
   };
 
-  handleESClick = () => {
-    this.setState({
-      gameProgress: "HoleScoreForm"
-    });
+  setStorage = () => {
+    let playerStorage = localStorage.setItem(
+      "holeNum",
+      (this.state.holeNum + 1).toString()
+    );
+    localStorage.setItem("matchID", this.state.matchID);
+    localStorage.setItem(
+      "players",
+      this.state.players.map(player => player.username).join(",")
+    );
+
+    localStorage.setItem("originalWager", this.state.originalWager);
   };
 
   handleMatchSummaryButton = () => {
@@ -294,24 +335,60 @@ class GameView extends Component {
             </h4>
             <h4>Wager: ${this.state.tallyWager}</h4>
 
-            <EnterScoreButton handleESClick={this.handleESClick} />
+            <EnterScoreForm
+              players={this.state.players}
+              holeNum={this.state.holeNum}
+              matchID={this.state.matchID}
+              team1={this.state.team1}
+              team2={this.state.team2}
+              tallyWager={this.state.tallyWager}
+              originalWager={this.state.originalWager}
+              onScoreSubmit={this.onScoreSubmit}
+            />
           </div>
         );
         break;
-      case "HoleScoreForm":
-        return (
-          <EnterScoreForm
-            players={this.state.players}
-            holeNum={this.state.holeNum}
-            matchID={this.state.matchID}
-            team1={this.state.team1}
-            team2={this.state.team2}
-            tallyWager={this.state.tallyWager}
-            originalWager={this.state.originalWager}
-            onScoreSubmit={this.onScoreSubmit}
-          />
-        );
-        break;
+      // case "HoleScoreForm":
+      // let team1Display = "";
+      // let team2Display = "";
+      // if (this.state.team1.length === 2) {
+      //   team1Display = `${this.state.team1[0].username} & ${
+      //     this.state.team1[1].username
+      //   }`;
+      // } else {
+      //   team1Display = this.state.team1[0].username;
+      // }
+      // if (this.state.team2.length === 2) {
+      //   team2Display = `${this.state.team2[0].username} & ${
+      //     this.state.team2[1].username
+      //   }`;
+      // } else {
+      //   team2Display = `${this.state.team2[0].username}, ${
+      //     this.state.team2[1].username
+      //   } & ${this.state.team2[2].username}`;
+      // }
+
+      // return (
+      //   <div className="MidRound">
+      //     <h3>Hole: {this.state.holeNum}</h3>
+      //     <h4>
+      //       {team1Display} <br /> vs <br /> {team2Display}
+      //     </h4>
+      //     <h4>Wager: ${this.state.tallyWager}</h4>
+      //     <br />
+      //     <EnterScoreForm
+      //       players={this.state.players}
+      //       holeNum={this.state.holeNum}
+      //       matchID={this.state.matchID}
+      //       team1={this.state.team1}
+      //       team2={this.state.team2}
+      //       tallyWager={this.state.tallyWager}
+      //       originalWager={this.state.originalWager}
+      //       onScoreSubmit={this.onScoreSubmit}
+      //     />
+      //   </div>
+      // );
+      // break;
       case "MatchSummary":
         return (
           <div className="MatchSummary">
