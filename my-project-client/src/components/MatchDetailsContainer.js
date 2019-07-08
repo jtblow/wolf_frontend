@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import MatchSummaryCard from "./MatchSummaryCard";
+import MatchDetailsCard from "./MatchDetailsCard";
 
 class MatchDetailsContainer extends Component {
   constructor() {
@@ -12,7 +12,7 @@ class MatchDetailsContainer extends Component {
   showCard = holes => {
     this.setState({
       matchDetailsCards: this.props.players.map(player =>
-        this.getSummaryCard(player, holes)
+        this.getDetailsCard(player, holes)
       )
     });
   };
@@ -26,13 +26,18 @@ class MatchDetailsContainer extends Component {
   getDetailsCard = (player, holes) => {
     let filteredHoles = holes.filter(hole => hole.user_id === player.id);
 
-    return (
-      <MatchSummaryCard
-        player={player}
-        score={filteredHoles.score}
-        outcome={filteredHoles.outcome}
-      />
-    );
+    let filteredHoleCards = filteredHoles.map(hole => {
+      return (
+        <MatchDetailsCard
+          player={player}
+          score={hole.score}
+          outcome={hole.outcome}
+          holeNum={hole.hole_number}
+        />
+      );
+    });
+
+    return filteredHoleCards;
   };
 
   render() {
@@ -43,15 +48,26 @@ class MatchDetailsContainer extends Component {
         <table>
           <tbody>
             <tr>
-              <th>Player</th>
-              <th>Score</th>
-              <th>Bank</th>
+              <th />
+              <th scope="col">header1</th>
+              <th scope="col">header2</th>
+              <th scope="col">header3</th>
             </tr>
-            {this.state.matchDetailsCards}
+            {this.state.matchDetailsCards.slice(0, 4)}
+            <tr>
+              <th scope="row">header 2</th>
+              {this.state.matchDetailsCards.slice(4, 8)}
+            </tr>
+            <tr>
+              <th scope="row">header 3</th>
+              <td>3</td>
+              <td>3</td>
+              <td>3</td>
+            </tr>
           </tbody>
         </table>
       </div>
     );
   }
 }
-export default MatchSummaryView;
+export default MatchDetailsContainer;

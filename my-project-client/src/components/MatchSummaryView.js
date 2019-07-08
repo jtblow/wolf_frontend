@@ -1,12 +1,15 @@
 import React, { Component } from "react";
 import MatchSummaryCard from "./MatchSummaryCard";
+import MatchDetailsContainer from "./MatchDetailsContainer";
+import MatchDetailsButton from "./MatchDetailsButton";
 import "../App.css";
 
 class MatchSummaryView extends Component {
   constructor() {
     super();
     this.state = {
-      matchSummaryCards: ""
+      matchSummaryCards: "",
+      detailsView: false
     };
   }
 
@@ -15,6 +18,12 @@ class MatchSummaryView extends Component {
       matchSummaryCards: this.props.players.map(player =>
         this.getSummaryCard(player, holes)
       )
+    });
+  };
+  handleMatchDetailsButton = event => {
+    event.preventDefault();
+    this.setState({
+      detailsView: !this.state.detailsView
     });
   };
 
@@ -41,8 +50,7 @@ class MatchSummaryView extends Component {
       />
     );
   };
-
-  render() {
+  matchSumView = () => {
     return (
       <div>
         <h2>Match Summary</h2>
@@ -57,7 +65,23 @@ class MatchSummaryView extends Component {
             {this.state.matchSummaryCards}
           </tbody>
         </table>
+        <MatchDetailsButton
+          handleMatchDetailsButton={this.handleMatchDetailsButton}
+        />
       </div>
+    );
+  };
+  render() {
+    return this.state.detailsView ? (
+      <div>
+        <MatchDetailsContainer
+          players={this.props.players}
+          match={this.props.match}
+          holeNum={this.props.holeNum}
+        />
+      </div>
+    ) : (
+      this.matchSumView()
     );
   }
 }

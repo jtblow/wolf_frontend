@@ -1,6 +1,11 @@
 import React from "react";
 
 const BeginRoundButton = props => {
-  return <button onClick={props.handleBeginRoundClick}> Begin Round </button>;
+  return (
+    <button className="arrow" onClick={props.handleBeginRoundClick}>
+      {" "}
+      Begin Round{" "}
+    </button>
+  );
 };
 export default BeginRoundButton;

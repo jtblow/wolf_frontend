@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import GameView from "./GameView";
 import Login from "./Login";
 import UserMatchList from "./UserMatchList";
+import CreateAccount from "./CreateAccount";
 import "../App.css";
 
 class Home extends Component {
@@ -46,6 +47,11 @@ class Home extends Component {
     });
   };
 
+  handleCreateAccountClick = event => {
+    event.preventDefault();
+    this.setState({ currentView: "CreateAccount" });
+  };
+
   getLoginData = response => {
     this.setState({
       signedInUser: {
@@ -70,8 +76,23 @@ class Home extends Component {
   homeRenderController = () => {
     switch (this.state.currentView) {
       case "login":
-        return <Login className="Login" getLoginData={this.getLoginData} />;
+        return (
+          <div>
+            <Login className="Login" getLoginData={this.getLoginData} />;
+            <br />
+            <button
+              className="CreateAccountButton"
+              onClick={this.handleCreateAccountClick}
+            >
+              Create Account
+            </button>
+          </div>
+        );
         break;
+      case "CreateAccount":
+        return <CreateAccount getLoginData={this.getLoginData} />;
+        break;
+
       case "HomeView":
         return (
           <div className="HomeView">

@@ -316,6 +316,7 @@ class GameView extends Component {
         return (
           <div className="MatchSummary">
             <MatchSummaryView
+              holeNum={this.state.holeNum}
               players={this.state.players}
               match={this.state.matchID}
             />

@@ -114,9 +114,17 @@ class EnterScoreForm extends Component {
         // first and second player are on same team2
       } else if (
         sortedScores[0].score <= sortedScores[1].score &&
+        sortedScores[0].team == sortedScores[1].team &&
+        this.props.team2.length == 3
+      ) {
+        let winningTeam = sortedScores[0].team;
+        sortedScores[i].team == winningTeam
+          ? (sortedScores[i].outcome = this.props.tallyWager)
+          : (sortedScores[i].outcome = this.props.tallyWager * -3);
+      } else if (
+        sortedScores[0].score <= sortedScores[1].score &&
         sortedScores[0].team == sortedScores[1].team
       ) {
-        debugger;
         let winningTeam = sortedScores[0].team;
         sortedScores[i].team == winningTeam
           ? (sortedScores[i].outcome = this.props.tallyWager)
