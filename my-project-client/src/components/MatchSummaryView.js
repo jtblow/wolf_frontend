@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MatchSummaryCard from "./MatchSummaryCard";
 import MatchDetailsContainer from "./MatchDetailsContainer";
 import MatchDetailsButton from "./MatchDetailsButton";
+import BackButton from "./BackButton";
 import "../App.css";
 
 class MatchSummaryView extends Component {
@@ -91,6 +92,7 @@ class MatchSummaryView extends Component {
           match={this.props.match}
           holeNum={this.props.holeNum}
         />
+        <BackButton handleBack={this.handleBack} />
       </div>
     ) : (
       this.matchSumView()

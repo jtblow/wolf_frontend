@@ -53,25 +53,33 @@ class GameView extends Component {
       matchFormData.player4
     ];
 
-    let playerString = "";
-    newPlayers.forEach(player => {
-      playerString += player + ",";
-    });
-    fetch(
-      `http://localhost:3000/api/v1/users/find_multiple_users_by_name/${playerString}`
-    )
-      .then(resp => resp.json())
-      .then(players =>
-        this.setState({
-          players,
-          originalWager: matchFormData.wager,
-          tallyWager: matchFormData.wager,
-          matchID: matchFormData.matchID,
-          gameProgress: "Beginning"
-        })
-      );
-  };
+    if (!newPlayers.includes(null)) {
+      let playerString = "";
+      newPlayers.forEach(player => {
+        playerString += player + ",";
+      });
+      fetch(
+        `http://localhost:3000/api/v1/users/find_multiple_users_by_name/${playerString}`
+      )
+        .then(resp => resp.json())
 
+        .then(players =>
+          this.setState({
+            players,
+            originalWager: matchFormData.wager,
+            tallyWager: matchFormData.wager,
+            matchID: matchFormData.matchID,
+            gameProgress: "Beginning"
+          })
+        )
+        .catch(error => {
+          alert(error);
+          this.setState({ gameProgress: "MatchForm" });
+        });
+    } else {
+      alert("You need 4 registered players to play this game");
+    }
+  };
   // establishPlayers = newPlayers => {
   //   let fetchedPlayers = [];
   //
@@ -266,7 +274,7 @@ class GameView extends Component {
       case "OrderGenerator":
         return (
           <div className="OrderGenerator">
-            <h4>Generating Random Wolf Order...</h4>
+            <h2>Generating Random Wolf Order...</h2>
             <GeneratingOrder />;
           </div>
         );
@@ -275,8 +283,9 @@ class GameView extends Component {
         return (
           <div className="WolfSelection">
             <h3>Wolf Selection</h3>
-            <h4>Hole: {this.state.holeNum}</h4>
-            <h4>Wager: ${this.state.tallyWager}</h4>
+            <h4>
+              Hole: {this.state.holeNum} Wager: ${this.state.tallyWager}
+            </h4>
 
             <PlayerCardContainer
               players={this.state.players}
@@ -329,12 +338,14 @@ class GameView extends Component {
 
         return (
           <div className="MidRound">
-            <h5>
-              Hole: {this.state.holeNum} Wager: ${this.state.tallyWager}
-            </h5>
-            <h6>
-              {team1Display} vs {team2Display}
-            </h6>
+            <div className="viewTitle">
+              <p>
+                Hole: {this.state.holeNum} Wager: ${this.state.tallyWager}
+              </p>
+              <p>
+                {team1Display} vs {team2Display}
+              </p>
+            </div>
 
             <EnterScoreForm
               players={this.state.players}

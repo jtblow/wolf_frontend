@@ -68,7 +68,7 @@ class Home extends Component {
   };
 
   handleClick = event => {
-    if (event.target.innerText === "View Your Wolf Matches") {
+    if (event.target.innerText === "View Past Matches") {
       this.setState({ currentView: "UserMatchList" });
     } else if (event.target.innerText === "Start a New Match") {
       localStorage.removeItem("matchID");
@@ -124,14 +124,14 @@ class Home extends Component {
                 className="HomeButtons"
                 onClick={event => this.handleClick(event)}
               >
-                View Your Wolf Matches
+                View Past Matches
               </div>
               <br />
               <div
                 className="HomeButtons"
                 onClick={event => this.handleClick(event)}
               >
-                Continue Current Match
+                Continue Match
               </div>
               <br />
               <div
@@ -153,7 +153,7 @@ class Home extends Component {
                 className="HomeButtons"
                 onClick={event => this.handleClick(event)}
               >
-                View Your Wolf Matches
+                View Past Matches
               </div>
               <br />
               <div

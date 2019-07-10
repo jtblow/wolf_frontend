@@ -3,7 +3,7 @@ import React from "react";
 const MatchDetailsButton = props => {
   return (
     <div
-      className="ViewMatchSummaryButton"
+      className="ViewMatchDetailsButton"
       onClick={props.handleMatchDetailsButton}
     >
       {" "}

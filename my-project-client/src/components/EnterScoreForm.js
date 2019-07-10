@@ -251,21 +251,29 @@ class EnterScoreForm extends Component {
             </select>
             <br />
             <br />
-            <div className="playerScoreContainer">
+            <div className="player1ScoreContainer">
               <div>
-                <div>{`${this.props.players[0].username}'s Score`}</div>
+                <div className="BackgroundText">
+                  {this.props.players[0].username}
+                </div>
                 {this.renderPlayer1ScoreButtons()}
               </div>
-              <div className="playerScoreContainer">
-                <div> {`${this.props.players[1].username}'s Score`}</div>
+              <div className="player2ScoreContainer">
+                <div className="BackgroundText">
+                  {this.props.players[1].username}
+                </div>
                 {this.renderPlayer2ScoreButtons()}
               </div>
-              <div className="playerScoreContainer">
-                <div> {`${this.props.players[2].username}'s Score`}</div>
+              <div className="player3ScoreContainer">
+                <div className="BackgroundText">
+                  {this.props.players[2].username}
+                </div>
                 {this.renderPlayer3ScoreButtons()}
               </div>
-              <div className="playerScoreContainer">
-                <div> {`${this.props.players[3].username}'s Score`}</div>
+              <div className="player4ScoreContainer">
+                <div className="BackgroundText">
+                  {this.props.players[3].username}
+                </div>
                 {this.renderPlayer4ScoreButtons()}
               </div>
             </div>

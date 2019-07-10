@@ -7,9 +7,9 @@ class MatchForm extends Component {
     this.state = {
       course_name: "",
       player1: this.props.signedInUser.username,
-      player2: "",
-      player3: "",
-      player4: "",
+      player2: null,
+      player3: null,
+      player4: null,
       wager: "",
       matchID: ""
     };

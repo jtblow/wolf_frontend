@@ -2,10 +2,16 @@ body {
   margin: 0;
   font-family: "Russo One", sans-serif;
   font-family: "Cinzel", serif;
-  /* font-family: "Barlow Condensed", sans-serif; */
-  /* font-family: "Cormorant Garamond", serif; */
-  /* font-family: "Fira Sans Extra Condensed", sans-serif; */
+  font-family: "Nosifer", cursive;
+  font-family: "Junge", serif;
+
+  font-family: "Carrois Gothic SC", sans-serif;
+  font-family: "Rubik Mono One", sans-serif;
+  font-family: "Exo", sans-serif;
+  font-family: "Old Standard TT", serif;
+  /* font-family: "New Rocker", cursive; */
   background-color: #eeebe7;
+  color: #041809;
 }
 
 code {
