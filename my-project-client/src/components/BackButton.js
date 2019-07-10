@@ -2,7 +2,7 @@ import React from "react";
 
 const BackButton = props => {
   return (
-    <button className="backbutton" onClick={props.handleBack}>
+    <button className="butn" onClick={props.handleBack}>
       {" "}
       Back{" "}
     </button>

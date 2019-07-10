@@ -58,7 +58,7 @@ class GameView extends Component {
       playerString += player + ",";
     });
     fetch(
-      `http://localhost:3000/api/v1/users/find_multiple_users/${playerString}`
+      `http://localhost:3000/api/v1/users/find_multiple_users_by_name/${playerString}`
     )
       .then(resp => resp.json())
       .then(players =>
@@ -329,11 +329,12 @@ class GameView extends Component {
 
         return (
           <div className="MidRound">
-            <h3>Hole: {this.state.holeNum}</h3>
-            <h4>
-              {team1Display} <br /> vs <br /> {team2Display}
-            </h4>
-            <h4>Wager: ${this.state.tallyWager}</h4>
+            <h5>
+              Hole: {this.state.holeNum} Wager: ${this.state.tallyWager}
+            </h5>
+            <h6>
+              {team1Display} vs {team2Display}
+            </h6>
 
             <EnterScoreForm
               players={this.state.players}

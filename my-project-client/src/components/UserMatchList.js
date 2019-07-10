@@ -48,12 +48,7 @@ class UserMatchList extends Component {
     if (this.state.view === "MatchList") {
       return this.state.userMatches;
     } else {
-      return (
-        <div>
-          <MatchSummaryView match={this.state.match} />;
-          <div handleBackClick={event => this.handleBackClick(event)}>Back</div>
-        </div>
-      );
+      return <MatchSummaryView match={this.state.match} />;
     }
   };
 

@@ -3,6 +3,8 @@ import GameView from "./GameView";
 import Login from "./Login";
 import UserMatchList from "./UserMatchList";
 import CreateAccount from "./CreateAccount";
+import HomeButton from "./HomeButton";
+import Header from "./Header";
 import "../App.css";
 
 class Home extends Component {
@@ -76,11 +78,20 @@ class Home extends Component {
     }
   };
 
+  handleHome = event => {
+    event.preventDefault();
+    this.setState({ currentView: "HomeView" });
+  };
+
   homeRenderController = () => {
     switch (this.state.currentView) {
       case "login":
         return (
           <div>
+            <Header
+              currentView={this.state.currentView}
+              handleHome={this.handleHome}
+            />
             <Login className="Login" getLoginData={this.getLoginData} />;
             <br />
             <button
@@ -93,13 +104,22 @@ class Home extends Component {
         );
         break;
       case "CreateAccount":
-        return <CreateAccount getLoginData={this.getLoginData} />;
+        return (
+          <div>
+            <Header currentView={this.state.currentView} />
+            <CreateAccount getLoginData={this.getLoginData} />
+          </div>
+        );
         break;
 
       case "HomeView":
         if (localStorage.getItem("matchID")) {
           return (
             <div className="HomeView">
+              <Header
+                currentView={this.state.currentView}
+                handleHome={this.handleHome}
+              />
               <div
                 className="HomeButtons"
                 onClick={event => this.handleClick(event)}
@@ -125,6 +145,10 @@ class Home extends Component {
         } else {
           return (
             <div className="HomeView">
+              <Header
+                currentView={this.state.currentView}
+                handleHome={this.handleHome}
+              />
               <div
                 className="HomeButtons"
                 onClick={event => this.handleClick(event)}
@@ -143,10 +167,28 @@ class Home extends Component {
         }
         break;
       case "UserMatchList":
-        return <UserMatchList signedInUser={this.state.signedInUser} />;
+        return (
+          <div>
+            <Header
+              currentView={this.state.currentView}
+              handleHome={this.handleHome}
+            />
+
+            <UserMatchList signedInUser={this.state.signedInUser} />
+          </div>
+        );
         break;
       case "GameView":
-        return <GameView signedInUser={this.state.signedInUser} />;
+        return (
+          <div>
+            <Header
+              currentView={this.state.currentView}
+              handleHome={this.handleHome}
+            />
+
+            <GameView signedInUser={this.state.signedInUser} />
+          </div>
+        );
     }
   };
 

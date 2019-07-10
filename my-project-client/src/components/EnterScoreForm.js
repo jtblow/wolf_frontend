@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import "../App.css";
+import PlayerScoreButtons from "./PlayerScoreButtons";
+import Player2ScoreButtons from "./Player2ScoreButtons";
+import Player3ScoreButtons from "./Player3ScoreButtons";
+import Player4ScoreButtons from "./Player4ScoreButtons";
 const holesURL = "http://localhost:3000/api/v1/holes";
+const imgURL =
+  "https://i.ibb.co/p1ywxbZ/Depositphotos-4815325-s-2015-1024x1024.png";
 
+let numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 class EnterScoreForm extends Component {
   constructor(props) {
     super(props);
@@ -10,37 +17,39 @@ class EnterScoreForm extends Component {
       player1: "",
       player2: "",
       player3: "",
-      player4: ""
+      player4: "",
+      selectedButtons: []
     };
   }
-  handleParTextChange = event => {
+  handleParChange = event => {
     this.setState({
       par: event.target.value
     });
   };
   handleP1TextChange = event => {
+    event.preventDefault();
+
     this.setState({
       player1: event.target.value
     });
   };
   handleP2TextChange = event => {
+    event.preventDefault();
+
     this.setState({
       player2: event.target.value
     });
   };
   handleP3TextChange = event => {
+    event.preventDefault();
     this.setState({
       player3: event.target.value
     });
   };
   handleP4TextChange = event => {
+    event.preventDefault();
     this.setState({
       player4: event.target.value
-    });
-  };
-  handleWagerTextChange = event => {
-    this.setState({
-      wager: event.target.value
     });
   };
 
@@ -159,61 +168,113 @@ class EnterScoreForm extends Component {
     this.props.onScoreSubmit(sortedScores);
   };
 
+  renderPlayer1ScoreButtons = () => {
+    let p1Buttons = numArray.map(num => {
+      return (
+        <PlayerScoreButtons
+          key={num}
+          ref={"Player1Num" + num}
+          num={num}
+          selectedNumber={this.state.player1}
+          handleP1TextChange={this.handleP1TextChange}
+        />
+      );
+    });
+    return p1Buttons;
+  };
+  renderPlayer2ScoreButtons = () => {
+    let p2Buttons = numArray.map(num => {
+      return (
+        <Player2ScoreButtons
+          key={num}
+          num={num}
+          selectedNumber={this.state.player2}
+          handleP2TextChange={this.handleP2TextChange}
+        />
+      );
+    });
+    return p2Buttons;
+  };
+  renderPlayer3ScoreButtons = () => {
+    let p3Buttons = numArray.map(num => {
+      return (
+        <Player3ScoreButtons
+          key={num}
+          num={num}
+          selectedNumber={this.state.player3}
+          handleP3TextChange={this.handleP3TextChange}
+        />
+      );
+    });
+    return p3Buttons;
+  };
+
+  renderPlayer4ScoreButtons = () => {
+    let p4Buttons = numArray.map(num => {
+      return (
+        <Player4ScoreButtons
+          key={num}
+          num={num}
+          selectedNumber={this.state.player4}
+          handleP4TextChange={this.handleP4TextChange}
+        />
+      );
+    });
+    return p4Buttons;
+  };
+
+  handlePlayerClick = event => {
+    switch (event.target.innerText) {
+      case `${this.props.players[1].username}'s Score`:
+        return this.renderPlayer1ScoreButtons();
+        break;
+      default:
+    }
+  };
+
   render() {
     return (
-      <div className="score-form">
-        <form onSubmit={this.handleSubmit}>
-          <label className="label">Par</label>
-          <input
-            type="text"
-            placeholder="Enter the Par from Scorecard..."
-            value={this.state.par}
-            className="ScoreFormInput"
-            onChange={this.handleParTextChange}
-          />
+      <div>
+        <div />
 
-          <br />
+        <div className="score-form">
+          <form onSubmit={this.handleSubmit}>
+            <label for="par-select" className="label">
+              Par
+            </label>
 
-          <label className="label">{this.props.players[0].username}</label>
-          <input
-            type="text"
-            placeholder={`${this.props.players[0].username}'s score...'`}
-            value={this.state.player1}
-            onChange={this.handleP1TextChange}
-            className="ScoreFormInput"
-          />
-          <br />
-          <label className="label">{this.props.players[1].username}</label>
-          <input
-            type="text"
-            placeholder={`${this.props.players[1].username}'s score...'`}
-            value={this.state.player2}
-            onChange={this.handleP2TextChange}
-            className="ScoreFormInput"
-          />
-          <br />
-          <label className="label">{this.props.players[2].username}</label>
-          <input
-            type="text"
-            placeholder={`${this.props.players[2].username}'s score...'`}
-            value={this.state.player3}
-            onChange={this.handleP3TextChange}
-            className="ScoreFormInput"
-          />
-          <br />
-          <label className="label">{this.props.players[3].username}</label>
-          <input
-            label={this.props.players[3].username}
-            type="text"
-            placeholder={`${this.props.players[3].username}'s score...'`}
-            value={this.state.player4}
-            onChange={this.handleP4TextChange}
-            className="ScoreFormInput"
-          />
+            <select id="par-select" onChange={this.handleParChange}>
+              <option value="">Select Par</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select>
+            <br />
+            <br />
+            <div className="playerScoreContainer">
+              <div>
+                <div>{`${this.props.players[0].username}'s Score`}</div>
+                {this.renderPlayer1ScoreButtons()}
+              </div>
+              <div className="playerScoreContainer">
+                <div> {`${this.props.players[1].username}'s Score`}</div>
+                {this.renderPlayer2ScoreButtons()}
+              </div>
+              <div className="playerScoreContainer">
+                <div> {`${this.props.players[2].username}'s Score`}</div>
+                {this.renderPlayer3ScoreButtons()}
+              </div>
+              <div className="playerScoreContainer">
+                <div> {`${this.props.players[3].username}'s Score`}</div>
+                {this.renderPlayer4ScoreButtons()}
+              </div>
+            </div>
 
-          <br />
-          <input type="submit" value="Submit" />
-        </form>
+            <br />
+
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
       </div>
     );
   }
