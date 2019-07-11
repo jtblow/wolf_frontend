@@ -111,10 +111,17 @@ class EnterScoreForm extends Component {
 
     for (let i = 0; i < sortedScores.length; i++) {
       // no tie, regular scenario, one player has lowest score
+      // if (this.props.team1.length == 1) {
+      //
+      // }
 
+      // if (this.props.team1.length == 1) {
+      //   if (sortedScores[0].score !==)
+      // }
       if (
         sortedScores[0].score !== sortedScores[1].score &&
-        sortedScores[0].team !== sortedScores[1].team
+        sortedScores[0].team !== sortedScores[1].team &&
+        this.props.team1.length == 1
       ) {
         let winningTeam = sortedScores[0].team;
         sortedScores[i].team == winningTeam
@@ -122,9 +129,19 @@ class EnterScoreForm extends Component {
           : (sortedScores[i].outcome = this.props.tallyWager * -1);
         // first and second player are on same team2
       } else if (
+        sortedScores[0].score !== sortedScores[1].score &&
+        sortedScores[0].team !== sortedScores[1].team &&
+        this.props.team1.length == 2
+      ) {
+        let winningTeam = sortedScores[0].team;
+
+        sortedScores[i].team == winningTeam
+          ? (sortedScores[i].outcome = this.props.tallyWager)
+          : (sortedScores[i].outcome = this.props.tallyWager * -1);
+      } else if (
         sortedScores[0].score <= sortedScores[1].score &&
         sortedScores[0].team == sortedScores[1].team &&
-        this.props.team2.length == 3
+        this.props.team1.length == 1
       ) {
         let winningTeam = sortedScores[0].team;
         sortedScores[i].team == winningTeam
@@ -132,7 +149,18 @@ class EnterScoreForm extends Component {
           : (sortedScores[i].outcome = this.props.tallyWager * -3);
       } else if (
         sortedScores[0].score <= sortedScores[1].score &&
-        sortedScores[0].team == sortedScores[1].team
+        sortedScores[0].team == sortedScores[1].team &&
+        this.props.team1.length == 2
+      ) {
+        let winningTeam = sortedScores[0].team;
+        sortedScores[i].team == winningTeam
+          ? (sortedScores[i].outcome = this.props.tallyWager)
+          : (sortedScores[i].outcome = this.props.tallyWager * -1);
+      } else if (
+        sortedScores[0].score <= sortedScores[1].score &&
+        sortedScores[0].team == sortedScores[1].team &&
+        this.props.team1.length == 2 &&
+        sortedScores[0].score !== sortedScores[3].score
       ) {
         let winningTeam = sortedScores[0].team;
         sortedScores[i].team == winningTeam
@@ -239,11 +267,11 @@ class EnterScoreForm extends Component {
 
         <div className="score-form">
           <form onSubmit={this.handleSubmit}>
-            <label for="par-select" className="label">
-              Par
-            </label>
-
-            <select id="par-select" onChange={this.handleParChange}>
+            <select
+              className="custom-select"
+              id="par-select"
+              onChange={this.handleParChange}
+            >
               <option value="">Select Par</option>
               <option value="3">3</option>
               <option value="4">4</option>

@@ -31,7 +31,11 @@ class UserMatchList extends Component {
   };
 
   renderListings = matches => {
-    let userMatches = matches.map(match => {
+    let sortedMatches = matches.sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    );
+    let userMatches = sortedMatches.map(match => {
       return (
         <UserMatchListing
           matchListing={match}

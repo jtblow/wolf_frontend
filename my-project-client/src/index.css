@@ -9,9 +9,13 @@ body {
   font-family: "Rubik Mono One", sans-serif;
   font-family: "Exo", sans-serif;
   font-family: "Old Standard TT", serif;
+  font-family: "Cormorant Unicase", serif;
+  font-family: "Shojumaru", cursive;
+  font-family: "Aclonica", sans-serif;
+  font-family: "Cinzel Decorative", cursive;
   /* font-family: "New Rocker", cursive; */
-  background-color: #eeebe7;
-  color: #041809;
+  background-color: #343434;
+  color: #f7f7ff;
 }
 
 code {

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../App.css";
-const imgURL =
-  "https://i.ibb.co/p1ywxbZ/Depositphotos-4815325-s-2015-1024x1024.png";
+const imgURL = "https://i.ibb.co/nkTGQmj/greenball.png";
 class Player3ScoreButtons extends Component {
   constructor(props) {
     super(props);

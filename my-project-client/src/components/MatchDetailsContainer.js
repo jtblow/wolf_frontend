@@ -24,7 +24,9 @@ class MatchDetailsContainer extends Component {
   }
 
   getDetailsCard = (player, holes) => {
-    let filteredHoles = holes.filter(hole => hole.user_id === player.id);
+    let sortedHoles = holes.sort((a, b) => a.hole_number - b.hole_number);
+
+    let filteredHoles = sortedHoles.filter(hole => hole.user_id === player.id);
 
     let filteredHoleCards = filteredHoles.map(hole => {
       return (
@@ -43,7 +45,7 @@ class MatchDetailsContainer extends Component {
       <div>
         <h2>Match Details</h2>
 
-        <table>
+        <table className="Details">
           <thead>
             <tr>
               <th />

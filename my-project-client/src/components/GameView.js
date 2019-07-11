@@ -170,7 +170,7 @@ class GameView extends Component {
   handleWolfButton = event => {
     event.preventDefault();
     switch (event.target.innerText) {
-      case "Blind Wolf":
+      case "Blind":
         this.setState({
           team1: [this.state.players[0]],
           team2: [
@@ -182,7 +182,7 @@ class GameView extends Component {
           gameProgress: "MidRound"
         });
         break;
-      case "Strong Wolf":
+      case "Howl":
         this.setState({
           team1: [this.state.players[0]],
           team2: [
@@ -194,7 +194,7 @@ class GameView extends Component {
           gameProgress: "MidRound"
         });
         break;
-      case "Lone Wolf":
+      case "Lone":
         this.setState({
           team1: [this.state.players[0]],
           team2: [
@@ -206,6 +206,7 @@ class GameView extends Component {
         });
     }
   };
+
   handleBack = () => {
     this.setState({
       gameProgress: "WolfSelection"
@@ -259,7 +260,7 @@ class GameView extends Component {
       case "Beginning":
         return (
           <div className="Beginning">
-            <h3>The Field is Set</h3>
+            <h2>The Field is Set</h2>
             <PlayerCardContainer
               players={this.state.players}
               gameProgress={this.state.gameProgress}

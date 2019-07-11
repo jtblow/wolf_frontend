@@ -9,7 +9,7 @@ const Header = props => {
     return (
       <header className="App-header">
         <HomeButton handleHome={props.handleHome} />
-        <RulesButton />
+        <RulesButton handleRules={props.handleRules} />
         <div className="imgcontainer">
           <img
             src="https://i.ibb.co/SvwdGLJ/WolfLogo.png"

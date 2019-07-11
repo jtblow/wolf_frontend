@@ -32,7 +32,10 @@ class MatchSummaryView extends Component {
         });
       });
   };
-
+  handleBack = event => {
+    event.preventDefault();
+    this.setState({ detailsView: !this.state.detailsView });
+  };
   handleMatchDetailsButton = event => {
     event.preventDefault();
     this.setState({
@@ -68,7 +71,7 @@ class MatchSummaryView extends Component {
       <div>
         <h2>Match Summary</h2>
 
-        <table>
+        <table className="Summary">
           <tbody>
             <tr>
               <th>Player</th>

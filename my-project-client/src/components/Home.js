@@ -5,6 +5,7 @@ import UserMatchList from "./UserMatchList";
 import CreateAccount from "./CreateAccount";
 import HomeButton from "./HomeButton";
 import Header from "./Header";
+import Rules from "./Rules";
 import "../App.css";
 
 class Home extends Component {
@@ -82,6 +83,10 @@ class Home extends Component {
     event.preventDefault();
     this.setState({ currentView: "HomeView" });
   };
+  handleRules = event => {
+    event.preventDefault();
+    this.setState({ currentView: "Rules" });
+  };
 
   homeRenderController = () => {
     switch (this.state.currentView) {
@@ -91,8 +96,9 @@ class Home extends Component {
             <Header
               currentView={this.state.currentView}
               handleHome={this.handleHome}
+              handleRules={this.handleRules}
             />
-            <Login className="Login" getLoginData={this.getLoginData} />;
+            <Login className="Login" getLoginData={this.getLoginData} />
             <br />
             <button
               className="CreateAccountButton"
@@ -119,6 +125,7 @@ class Home extends Component {
               <Header
                 currentView={this.state.currentView}
                 handleHome={this.handleHome}
+                handleRules={this.handleRules}
               />
               <div
                 className="HomeButtons"
@@ -148,6 +155,7 @@ class Home extends Component {
               <Header
                 currentView={this.state.currentView}
                 handleHome={this.handleHome}
+                handleRules={this.handleRules}
               />
               <div
                 className="HomeButtons"
@@ -172,9 +180,24 @@ class Home extends Component {
             <Header
               currentView={this.state.currentView}
               handleHome={this.handleHome}
+              handleRules={this.handleRules}
             />
 
             <UserMatchList signedInUser={this.state.signedInUser} />
+          </div>
+        );
+        break;
+
+      case "Rules":
+        return (
+          <div>
+            <Header
+              currentView={this.state.currentView}
+              handleHome={this.handleHome}
+              handleRules={this.handleRules}
+            />
+
+            <Rules className="Rules" />
           </div>
         );
         break;
@@ -184,6 +207,7 @@ class Home extends Component {
             <Header
               currentView={this.state.currentView}
               handleHome={this.handleHome}
+              handleRules={this.handleRules}
             />
 
             <GameView signedInUser={this.state.signedInUser} />

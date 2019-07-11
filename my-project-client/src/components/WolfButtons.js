@@ -5,15 +5,15 @@ const WolfButtons = props => {
     <div>
       <button className="WolfButtons" onClick={props.handleWolfButton}>
         {" "}
-        Blind Wolf{" "}
+        Blind{" "}
       </button>
       <button className="WolfButtons" onClick={props.handleWolfButton}>
         {" "}
-        Strong Wolf{" "}
+        Howl{" "}
       </button>
       <button className="WolfButtons" onClick={props.handleWolfButton}>
         {" "}
-        Lone Wolf{" "}
+        Lone{" "}
       </button>
     </div>
   );
