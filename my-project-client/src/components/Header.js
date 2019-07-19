@@ -4,7 +4,8 @@ import RulesButton from "./RulesButton";
 const Header = props => {
   if (
     props.currentView === "UserMatchList" ||
-    props.currentView === "GameView"
+    props.currentView === "GameView" ||
+    props.currentView === "Rules"
   ) {
     return (
       <header className="App-header">

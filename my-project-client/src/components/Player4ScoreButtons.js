@@ -5,12 +5,16 @@ class Player4ScoreButtons extends Component {
   constructor(props) {
     super(props);
   }
+
   render() {
     if (this.props.selectedNumber == this.props.num) {
       return (
         <button
-          className="p4ScoreButtons"
-          onClick={event => this.props.handleP4TextChange(event)}
+          className="ScoreButtons"
+          onClick={event => {
+            this.props.handleP4TextChange(event);
+            this.props.handleScoreChoice(event);
+          }}
           value={this.props.num}
           style={{ backgroundImage: `url(${imgURL})` }}
         >
@@ -20,9 +24,13 @@ class Player4ScoreButtons extends Component {
     } else {
       return (
         <button
-          className="p4ScoreButtons"
+          className="ScoreButtons"
           onClick={event => this.props.handleP4TextChange(event)}
           value={this.props.num}
+          onClick={event => {
+            this.props.handleP4TextChange(event);
+            this.props.handleScoreChoice(event);
+          }}
         >
           {this.props.num}
         </button>

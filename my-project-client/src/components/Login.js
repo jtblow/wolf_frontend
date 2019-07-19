@@ -74,7 +74,10 @@ class Login extends Component {
           type="text"
         />
         <br />
-        <button onClick={event => this.handleCreateAccount(event)}>
+        <button
+          className="loginButton"
+          onClick={event => this.handleCreateAccount(event)}
+        >
           Login
         </button>
       </form>

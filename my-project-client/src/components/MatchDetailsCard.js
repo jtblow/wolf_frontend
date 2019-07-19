@@ -11,10 +11,10 @@ const MatchDetailsCard = props => {
     //   </tr>
     // </tbody>
 
-    <tr>
+    <React.Fragment>
       <td>{props.score}</td>
       <td>`$${props.outcome}`</td>
-    </tr>
+    </React.Fragment>
   );
 };
 export default MatchDetailsCard;

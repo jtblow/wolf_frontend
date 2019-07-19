@@ -98,14 +98,14 @@ class Home extends Component {
               handleHome={this.handleHome}
               handleRules={this.handleRules}
             />
-            <Login className="Login" getLoginData={this.getLoginData} />
-            <br />
             <button
               className="CreateAccountButton"
               onClick={this.handleCreateAccountClick}
             >
               Create Account
             </button>
+            <Login className="Login" getLoginData={this.getLoginData} />
+            <br />
           </div>
         );
         break;
