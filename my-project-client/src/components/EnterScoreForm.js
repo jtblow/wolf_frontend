@@ -1,15 +1,8 @@
 import React, { Component } from "react";
 import "../App.css";
-import Collapsible from "react-collapsible";
-
 import PlayerScoreButtons from "./PlayerScoreButtons";
-import Player2ScoreButtons from "./Player2ScoreButtons";
-import Player3ScoreButtons from "./Player3ScoreButtons";
-import Player4ScoreButtons from "./Player4ScoreButtons";
-import Player1ScoreContainer from "./Player1ScoreContainer";
-import Player2ScoreContainer from "./Player2ScoreContainer";
-import Player3ScoreContainer from "./Player3ScoreContainer";
-import Player4ScoreContainer from "./Player4ScoreContainer";
+
+import PlayerScoreContainer from "./PlayerScoreContainer";
 
 const holesURL = "http://localhost:3000/api/v1/holes";
 const imgURL =
@@ -21,10 +14,6 @@ class EnterScoreForm extends Component {
     super(props);
     this.state = {
       par: "",
-      player1: "",
-      player2: "",
-      player3: "",
-      player4: "",
       selectedButtons: [],
       selectedPlayer: ""
     };
@@ -36,38 +25,26 @@ class EnterScoreForm extends Component {
   };
   handleP1TextChange = event => {
     event.preventDefault();
-
-    this.setState({
-      player1: event.target.value
-    });
-  };
-  handleP2TextChange = event => {
-    event.preventDefault();
-
-    this.setState({
-      player2: event.target.value
-    });
-  };
-  handleP3TextChange = event => {
-    event.preventDefault();
-    this.setState({
-      player3: event.target.value
-    });
-  };
-  handleP4TextChange = event => {
-    event.preventDefault();
-    this.setState({
-      player4: event.target.value
-    });
+    if (this.state.selectedPlayer === this.props.players[0].username) {
+      this.setState({
+        player1: event.target.value
+      });
+    } else if (this.state.selectedPlayer === this.props.players[1].username) {
+      this.setState({
+        player2: event.target.value
+      });
+    } else if (this.state.selectedPlayer === this.props.players[2].username) {
+      this.setState({
+        player3: event.target.value
+      });
+    } else {
+      this.setState({
+        player4: event.target.value
+      });
+    }
   };
 
   handleSubmit = event => {
-    // let allScores = this.props.players;
-    //
-    // let keyScores =
-    //
-    // let sortedScores = allScores.sort();
-
     event.preventDefault();
     let holeData = [
       {
@@ -204,78 +181,30 @@ class EnterScoreForm extends Component {
     this.props.onScoreSubmit(sortedScores);
   };
 
-  // renderPlayer1ScoreButtons = () => {
-  //   let p1Buttons = numArray.map(num => {
-  //     return (
-  //       <PlayerScoreButtons
-  //         key={num}
-  //         ref={"Player1Num" + num}
-  //         num={num}
-  //         selectedNumber={this.state.player1}
-  //         handleP1TextChange={this.handleP1TextChange}
-  //       />
-  //     );
-  //   });
-  //   return p1Buttons;
-  // };
-  renderPlayer2ScoreButtons = () => {
-    let p2Buttons = numArray.map(num => {
-      return (
-        <Player2ScoreButtons
-          key={num}
-          num={num}
-          selectedNumber={this.state.player2}
-          handleP2TextChange={this.handleP2TextChange}
-        />
-      );
-    });
-    return p2Buttons;
-  };
-  renderPlayer3ScoreButtons = () => {
-    let p3Buttons = numArray.map(num => {
-      return (
-        <Player3ScoreButtons
-          key={num}
-          num={num}
-          selectedNumber={this.state.player3}
-          handleP3TextChange={this.handleP3TextChange}
-        />
-      );
-    });
-    return p3Buttons;
-  };
-
-  renderPlayer4ScoreButtons = () => {
-    let p4Buttons = numArray.map(num => {
-      return (
-        <Player4ScoreButtons
-          key={num}
-          num={num}
-          selectedNumber={this.state.player4}
-          handleP4TextChange={this.handleP4TextChange}
-        />
-      );
-    });
-    return p4Buttons;
-  };
-
   handlePlayerClick = event => {
     event.preventDefault();
     console.log(event.target.innerText);
     this.setState({ selectedPlayer: event.target.innerText });
   };
 
-  // renderController = () => {
-  //   switch (this.state.selectedPlayer) {
-  //     case expression:
-  //       break;
-  //     default:
-  //   }
-  //   if (this.state.selectedPlayer == this.props.players[0].username) {
-  //     return this.renderPlayer1ScoreButtons();
-  //   }
-  // };
+  renderPlayerContainers = () => {
+    {
+      let pContainers = this.props.players.map(player => {
+        let i = this.props.players.indexOf(player);
 
+        return (
+          <PlayerScoreContainer
+            player={player}
+            handleP1TextChange={this.handleP1TextChange}
+            selectedPlayer={this.state.selectedPlayer}
+            handlePlayerClick={this.handlePlayerClick}
+            players={this.props.players}
+          />
+        );
+      });
+      return pContainers;
+    }
+  };
   render() {
     return (
       <div>
@@ -295,42 +224,7 @@ class EnterScoreForm extends Component {
             </select>
             <br />
             <br />
-            <div>
-              <Player1ScoreContainer
-                handleP1TextChange={this.handleP1TextChange}
-                selectedNumber={this.state.player1}
-                players={this.props.players}
-                selectedPlayer={this.state.selectedPlayer}
-                handlePlayerClick={this.handlePlayerClick}
-              />
-            </div>
-            <div>
-              <Player2ScoreContainer
-                handleP2TextChange={this.handleP2TextChange}
-                selectedNumber={this.state.player2}
-                players={this.props.players}
-                selectedPlayer={this.state.selectedPlayer}
-                handlePlayerClick={this.handlePlayerClick}
-              />
-            </div>
-            <div>
-              <Player3ScoreContainer
-                handleP3TextChange={this.handleP3TextChange}
-                selectedNumber={this.state.player3}
-                players={this.props.players}
-                selectedPlayer={this.state.selectedPlayer}
-                handlePlayerClick={this.handlePlayerClick}
-              />
-            </div>
-            <div>
-              <Player4ScoreContainer
-                handleP4TextChange={this.handleP4TextChange}
-                selectedNumber={this.state.player4}
-                players={this.props.players}
-                selectedPlayer={this.state.selectedPlayer}
-                handlePlayerClick={this.handlePlayerClick}
-              />
-            </div>
+            <div>{this.renderPlayerContainers()}</div>
 
             <br />
 

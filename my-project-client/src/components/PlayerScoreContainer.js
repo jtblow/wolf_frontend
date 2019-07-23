@@ -5,11 +5,12 @@ import "../App.css";
 
 const imgURL = "https://i.ibb.co/nkTGQmj/greenball.png";
 
-class Player1ScoreContainer extends Component {
+class PlayerScoreContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      entered: false
+      entered: false,
+      score: ""
     };
   }
 
@@ -18,7 +19,7 @@ class Player1ScoreContainer extends Component {
   // };
   handleScoreChoice = event => {
     event.preventDefault();
-    this.setState({ entered: !this.state.entered });
+    this.setState({ entered: !this.state.entered, score: event.target.value });
   };
 
   handleReentry = event => {
@@ -32,9 +33,7 @@ class Player1ScoreContainer extends Component {
       return (
         <PlayerScoreButtons
           key={num}
-          ref={"Player1Num" + num}
           num={num}
-          selectedNumber={this.props.Player1}
           handleP1TextChange={this.props.handleP1TextChange}
           handleScoreChoice={this.handleScoreChoice}
         />
@@ -54,18 +53,18 @@ class Player1ScoreContainer extends Component {
               this.handleReentry(event);
             }}
           >
-            {this.props.players[0].username} - {this.props.selectedNumber}
+            {this.props.player.username} - {this.state.score}
           </div>
         </div>
       );
-    } else if (this.props.selectedPlayer == this.props.players[0].username) {
+    } else if (this.props.selectedPlayer === this.props.player.username) {
       return (
         <div>
           <div
             className="BackgroundText"
             onClick={event => this.props.handlePlayerClick(event)}
           >
-            {this.props.players[0].username}
+            {this.props.player.username}
           </div>
 
           <div className="Player1ScoreContainer">
@@ -80,7 +79,7 @@ class Player1ScoreContainer extends Component {
             className="BackgroundText"
             onClick={event => this.props.handlePlayerClick(event)}
           >
-            {this.props.players[0].username}
+            {this.props.player.username}
           </div>
           <div className="Player1ScoreContainer" />
         </div>
@@ -91,4 +90,4 @@ class Player1ScoreContainer extends Component {
     return this.renderController();
   }
 }
-export default Player1ScoreContainer;
+export default PlayerScoreContainer;
