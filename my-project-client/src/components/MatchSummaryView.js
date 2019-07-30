@@ -16,11 +16,19 @@ class MatchSummaryView extends Component {
   }
 
   showCard = holes => {
+    const fetchHeaders = {
+      Authorization: `Bearer ` + localStorage.getItem("token")
+    };
     let matchPlayers = [...new Set(holes.map(hole => hole.user_id))];
     let matchPlayersIDs = matchPlayers.join(",");
+
     fetch(
       "http://localhost:3000/api/v1/users/find_multiple_users_by_id/" +
-        matchPlayersIDs
+        matchPlayersIDs,
+      {
+        method: "GET",
+        headers: fetchHeaders
+      }
     )
       .then(resp => resp.json())
       .then(players => {
@@ -44,7 +52,13 @@ class MatchSummaryView extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3000/api/v1/matches/holes/${this.props.match}`)
+    const fetchHeaders = {
+      Authorization: `Bearer ` + localStorage.getItem("token")
+    };
+    fetch(`http://localhost:3000/api/v1/matches/holes/${this.props.match}`, {
+      method: "GET",
+      headers: fetchHeaders
+    })
       .then(resp => resp.json())
       .then(holes => this.showCard(holes));
   }

@@ -4,6 +4,9 @@ class CreateAccount extends Component {
   state = {
     username: "",
     email: "",
+    email2: "",
+    password: "",
+    password2: "",
     loginSuccessful: false
   };
 
@@ -19,15 +22,20 @@ class CreateAccount extends Component {
     const data = {
       user: {
         username: this.state.username,
-        email: this.state.email
+        email: this.state.email,
+        password: this.state.password
       }
     };
 
     const fetchHeaders = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Accept: "application/json"
     };
 
-    if (this.state.email === this.state.email2) {
+    if (
+      this.state.email === this.state.email2 &&
+      this.state.password === this.state.password2
+    ) {
       fetch(url, {
         method: "POST",
         body: JSON.stringify(data),
@@ -67,6 +75,21 @@ class CreateAccount extends Component {
           onChange={this.handleChange}
           placeholder="Confirm Email"
           name="email2"
+          type="text"
+        />
+        <input
+          className="FormInput"
+          onChange={this.handleChange}
+          placeholder="Password"
+          name="password"
+          type="text"
+        />
+        <br />
+        <input
+          className="FormInput"
+          onChange={this.handleChange}
+          placeholder="Confirm Password"
+          name="password2"
           type="text"
         />
         <br />

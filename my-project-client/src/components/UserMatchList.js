@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import UserMatchListing from "./UserMatchListing";
 import MatchSummaryView from "./MatchSummaryView";
 const url = "http://localhost:3000/api/v1/users/matches/";
+const fetchHeaders = {
+  Authorization: `Bearer ` + localStorage.getItem("token")
+};
 
 class UserMatchList extends Component {
   constructor() {
@@ -14,7 +17,10 @@ class UserMatchList extends Component {
   }
 
   componentDidMount() {
-    fetch(url + this.props.signedInUser.userID)
+    fetch(url + this.props.signedInUser.userID, {
+      method: "GET",
+      headers: fetchHeaders
+    })
       .then(resp => resp.json())
       .then(matches => this.renderListings(matches));
   }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 const matchURL = "http://localhost:3000/api/v1/matches";
+const token = localStorage.getItem("token");
 
 class MatchForm extends Component {
   constructor(props) {
@@ -51,12 +52,15 @@ class MatchForm extends Component {
       course_name: this.state.course_name,
       wager: this.state.wager
     };
+    const fetchHeaders = {
+      Authorization: `Bearer ` + localStorage.getItem("token"),
+      "Content-Type": "application/json",
+      Accept: "application/json"
+    };
+
     fetch(matchURL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json"
-      },
+      headers: fetchHeaders,
       body: JSON.stringify(matchData)
     })
       .then(resp => resp.json())

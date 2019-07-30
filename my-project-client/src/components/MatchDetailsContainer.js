@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import MatchDetailsCard from "./MatchDetailsCard";
+const fetchHeaders = {
+  Authorization: `Bearer ` + localStorage.getItem("token")
+};
 
 class MatchDetailsContainer extends Component {
   constructor() {
@@ -18,7 +21,10 @@ class MatchDetailsContainer extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3000/api/v1/matches/holes/${this.props.match}`)
+    fetch(`http://localhost:3000/api/v1/matches/holes/${this.props.match}`, {
+      method: "GET",
+      headers: fetchHeaders
+    })
       .then(resp => resp.json())
       .then(holes => this.showCard(holes));
   }

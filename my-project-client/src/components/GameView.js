@@ -10,6 +10,10 @@ import MatchSummaryButton from "./MatchSummaryButton";
 import BackButton from "./BackButton";
 import GeneratingOrder from "./GeneratingOrder";
 
+const fetchHeaders = {
+  Authorization: `Bearer ` + localStorage.getItem("token")
+};
+
 class GameView extends Component {
   constructor() {
     super();
@@ -30,7 +34,8 @@ class GameView extends Component {
       fetch(
         `http://localhost:3000/api/v1/users/find_multiple_users_by_name/${localStorage.getItem(
           "players"
-        )}`
+        )}`,
+        { method: "GET", headers: fetchHeaders }
       )
         .then(resp => resp.json())
         .then(players =>
@@ -58,8 +63,10 @@ class GameView extends Component {
       newPlayers.forEach(player => {
         playerString += player + ",";
       });
+
       fetch(
-        `http://localhost:3000/api/v1/users/find_multiple_users_by_name/${playerString}`
+        `http://localhost:3000/api/v1/users/find_multiple_users_by_name/${playerString}`,
+        { method: "GET", headers: fetchHeaders }
       )
         .then(resp => resp.json())
 

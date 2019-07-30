@@ -3,7 +3,7 @@ import "../App.css";
 class Login extends Component {
   state = {
     username: "",
-    email: "",
+    password: "",
     loginSuccessful: false
   };
 
@@ -15,20 +15,22 @@ class Login extends Component {
 
   handleCreateAccount = event => {
     event.preventDefault();
-    const url = "http://localhost:3000/api/v1/users/login";
+    const url = "http://localhost:3000/api/v1/login";
     const data = {
       user: {
         username: this.state.username,
-        email: this.state.email
+        password: this.state.password
       }
     };
 
     const fetchHeaders = {
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      Accept: "application/json"
     };
 
     fetch(url, {
       method: "POST",
+
       body: JSON.stringify(data),
       headers: fetchHeaders
     })
@@ -38,7 +40,6 @@ class Login extends Component {
         this.checkLoginResult(result);
         if (this.state.loginSuccessful === true) {
           this.props.getLoginData(result);
-          this.props.history.push("/");
         }
       })
       .catch(error => {
@@ -69,8 +70,8 @@ class Login extends Component {
         <input
           className="FormInput"
           onChange={this.handleChange}
-          placeholder="Email"
-          name="email"
+          placeholder="Password"
+          name="password"
           type="text"
         />
         <br />

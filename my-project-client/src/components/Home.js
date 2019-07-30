@@ -7,6 +7,9 @@ import HomeButton from "./HomeButton";
 import Header from "./Header";
 import Rules from "./Rules";
 import "../App.css";
+const fetchHeaders = {
+  Authorization: `Bearer ` + localStorage.getItem("token")
+};
 
 class Home extends Component {
   constructor() {
@@ -18,21 +21,11 @@ class Home extends Component {
     };
   }
   componentDidMount() {
-    if (localStorage.getItem("user")) {
-      const url = "http://localhost:3000/api/v1/users/login";
-      const data = {
-        user: {
-          username: localStorage.getItem("user"),
-          email: localStorage.getItem("mail")
-        }
-      };
-      const fetchHeaders = {
-        "Content-Type": "application/json"
-      };
+    if (localStorage.getItem("token")) {
+      const url = "http://localhost:3000/api/v1/profile";
 
       fetch(url, {
-        method: "POST",
-        body: JSON.stringify(data),
+        method: "GET",
         headers: fetchHeaders
       })
         .then(resp => resp.json())
@@ -40,11 +33,12 @@ class Home extends Component {
     }
   }
   stayLoggedIn = response => {
+    console.log(response);
     this.setState({
       signedInUser: {
-        userID: response.id,
-        username: response.username,
-        email: response.email
+        userID: response.user.id,
+        username: response.user.username,
+        email: response.user.email
       },
       currentView: "HomeView"
     });
@@ -58,14 +52,15 @@ class Home extends Component {
   getLoginData = response => {
     this.setState({
       signedInUser: {
-        userID: response.id,
-        username: response.username,
-        email: response.email
+        userID: response.user.id,
+        username: response.user.username,
+        email: response.user.email
       },
       currentView: "HomeView"
     });
     localStorage.setItem("user", this.state.signedInUser.username);
     localStorage.setItem("mail", this.state.signedInUser.email);
+    localStorage.setItem("token", response.jwt);
   };
 
   handleClick = event => {
