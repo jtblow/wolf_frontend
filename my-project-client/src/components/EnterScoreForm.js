@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import "../App.css";
 import PlayerScoreButtons from "./PlayerScoreButtons";
-
 import PlayerScoreContainer from "./PlayerScoreContainer";
-
 const holesURL = "http://localhost:3000/api/v1/holes";
 const imgURL =
   "https://i.ibb.co/p1ywxbZ/Depositphotos-4815325-s-2015-1024x1024.png";
-
 let numArray = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
 class EnterScoreForm extends Component {
   constructor(props) {
     super(props);
@@ -18,11 +16,13 @@ class EnterScoreForm extends Component {
       selectedPlayer: ""
     };
   }
+  // Sets par selection in state
   handleParChange = event => {
     this.setState({
       par: event.target.value
     });
   };
+  // Sets score selection in state
   handleP1TextChange = event => {
     event.preventDefault();
     if (this.state.selectedPlayer === this.props.players[0].username) {
@@ -103,6 +103,7 @@ class EnterScoreForm extends Component {
       // if (this.props.team1.length == 1) {
       //   if (sortedScores[0].score !==)
       // }
+
       if (
         sortedScores[0].score !== sortedScores[1].score &&
         sortedScores[0].team !== sortedScores[1].team &&

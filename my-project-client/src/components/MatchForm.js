@@ -1,4 +1,6 @@
 import React, { Component } from "react";
+import Search from "./Search";
+import Suggestions from "./Suggestions";
 const matchURL = "http://localhost:3000/api/v1/matches";
 const token = localStorage.getItem("token");
 
@@ -25,11 +27,28 @@ class MatchForm extends Component {
       player1: event.target.value
     });
   };
-  handleP2TextChange = event => {
-    this.setState({
-      player2: event.target.value
-    });
+
+  handleTextChange = event => {
+    console.log(event.currentTarget.dataset.value);
+    switch (event.currentTarget.dataset.value) {
+      case "Player2":
+        this.setState({
+          player2: event.target.innerText
+        });
+        break;
+      case "Player3":
+        this.setState({
+          player3: event.target.innerText
+        });
+        break;
+      case "Player4":
+        this.setState({
+          player4: event.target.innerText
+        });
+        break;
+    }
   };
+
   handleP3TextChange = event => {
     this.setState({
       player3: event.target.value
@@ -93,31 +112,24 @@ class MatchForm extends Component {
             value={this.props.signedInUser.username}
             readonly
           />
-          <br />
-          <input
-            className="FormInput"
-            type="text"
-            placeholder="Player 2..."
-            value={this.state.player2}
-            onChange={this.handleP2TextChange}
+
+          <Search
+            placeholder={"Player2..."}
+            name="Player2"
+            handleTextChange={this.handleTextChange}
           />
-          <br />
-          <input
-            className="FormInput"
-            type="text"
-            placeholder="Player 3..."
-            value={this.state.player3}
-            onChange={this.handleP3TextChange}
+
+          <Search
+            placeholder={"Player3..."}
+            name="Player3"
+            handleTextChange={this.handleTextChange}
           />
-          <br />
-          <input
-            className="FormInput"
-            type="text"
-            placeholder="Player 4..."
-            value={this.state.player4}
-            onChange={this.handleP4TextChange}
+
+          <Search
+            placeholder={"Player4..."}
+            name="Player4"
+            handleTextChange={this.handleTextChange}
           />
-          <br />
           <input
             className="FormInput"
             type="text"
@@ -125,7 +137,9 @@ class MatchForm extends Component {
             value={this.state.wager}
             onChange={this.handleWagerTextChange}
           />
+
           <br />
+
           <input type="submit" value="Submit" />
         </form>
       </div>
